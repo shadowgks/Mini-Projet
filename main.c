@@ -65,12 +65,12 @@ int calculateTimeToCompleteLap(){
     return vitesse;
 }
 void updateRaceCar(struct RaceCar *raceCar){
-    for(i=0; i<5; i++){
-        (*raceCar).totalLapTime = calculateTimeToCompleteLap();
+    for(int i=0; i<5; i++){
+        (*raceCar).totalLapTime = calculateTimeToCompleteLap() + (*raceCar).totalLapTime;
     }
 }
 void updateFirstPlace(struct Race *race, struct RaceCar *raceCare1, struct RaceCar *raceCare2){
-    if(raceCare1.totalLapTime > raceCare2.totalLapTim){
+    if((*raceCare1).totalLapTime > (*raceCare2).totalLapTime){
         strcpy((*race).firstPlaceDriverName , (*raceCare1).driverName);
         strcpy((*race).firstPlaceRaceCarColor, (*raceCare1).raceCarColor);
     }else{
