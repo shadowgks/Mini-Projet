@@ -44,7 +44,7 @@ void printFirstPlaceAfterLap(struct Race race){
 }
 void printCongratulation(struct Race race){
     printf("\n---------------------------------------------------------------------------");
-    printf("\nFelicitons tous %s, dans la voiture de course %s, pour son incroyable performance.C'etait vraiment une belle course et bonne nuit a tous !",race.firstPlaceDriverName,race.firstPlaceRaceCarColor);
+    printf("\nFelicitons tous %s, dans la voiture de course %s, pour son incroyable performance. C'etait vraiment une belle course et bonne nuit a tous !",race.firstPlaceDriverName,race.firstPlaceRaceCarColor);
 }
 int calculateTimeToCompleteLap(){
     int vitesse = rand() % 3 + 1;
@@ -64,6 +64,22 @@ int calculateTimeToCompleteLap(){
     vitesse += acceleraion + nerves;
     return vitesse;
 }
+void updateRaceCar(struct RaceCar *raceCar){
+    for(i=0; i<5; i++){
+        (*raceCar).totalLapTime = calculateTimeToCompleteLap();
+    }
+}
+void updateFirstPlace(struct Race *race, struct RaceCar *raceCare1, struct RaceCar *raceCare2){
+    if(raceCare1.totalLapTime > raceCare2.totalLapTim){
+        strcpy((*race).firstPlaceDriverName , (*raceCare1).driverName);
+        strcpy((*race).firstPlaceRaceCarColor, (*raceCare1).raceCarColor);
+    }else{
+        strcpy((*race).firstPlaceDriverName , (*raceCare2).driverName);
+        strcpy((*race).firstPlaceRaceCarColor, (*raceCare2).raceCarColor);
+    }
+}
+
+
 int main()
 {
     srand(time(0));
