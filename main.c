@@ -31,6 +31,7 @@ void printCountDown(){
     while(i >= 1){
         printf("%d\n",i);
         i--;
+        sleep(1);
     }
     printf("Course !\n");
     printf("\n---------------------------------------------------------------------------");
@@ -44,6 +45,24 @@ void printFirstPlaceAfterLap(struct Race race){
 void printCongratulation(struct Race race){
     printf("\n---------------------------------------------------------------------------");
     printf("\nFelicitons tous %s, dans la voiture de course %s, pour son incroyable performance.C'etait vraiment une belle course et bonne nuit a tous !",race.firstPlaceDriverName,race.firstPlaceRaceCarColor);
+}
+int calculateTimeToCompleteLap(){
+    int vitesse = rand() % 3 + 1;
+    int acceleraion = rand() % 3 + 1;
+    int nerves = rand() % 3 + 1;
+    switch(nerves){
+    case 1:
+        nerves = 3;
+        break;
+    case 2:
+        nerves = 2;
+        break;
+    case 3:
+        nerves = 1;
+        break;
+    }
+    vitesse += acceleraion + nerves;
+    return vitesse;
 }
 int main()
 {
