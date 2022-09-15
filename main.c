@@ -33,12 +33,17 @@ void printCountDown(){
         i--;
     }
     printf("Course !\n");
+    printf("\n---------------------------------------------------------------------------");
 }
 
 // Logic functions section
 void printFirstPlaceAfterLap(struct Race race){
-    printf("Apres le tour numero %d \nLa premiere place est occupee par: %s dans la voiture de course %s",race.numberOfLaps,race.firstPlaceDriverName,race.firstPlaceRaceCarColor);
+    printf("\nApres le tour numero %d \nLa premiere place est occupee par: %s dans la voiture de course %s\n",race.numberOfLaps,race.firstPlaceDriverName,race.firstPlaceRaceCarColor);
 
+}
+void printCongratulation(struct Race race){
+    printf("\n---------------------------------------------------------------------------");
+    printf("\nFelicitons tous %s, dans la voiture de course %s, pour son incroyable performance.C'etait vraiment une belle course et bonne nuit a tous !",race.firstPlaceDriverName,race.firstPlaceRaceCarColor);
 }
 int main()
 {
@@ -50,7 +55,8 @@ int main()
 
 	printIntro();
 	printCountDown();
-	printFirstPlaceAfterLap(R1)
+	printFirstPlaceAfterLap(R1);
+	printCongratulation(R2);
 
     return 0;
 }
