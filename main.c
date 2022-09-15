@@ -71,21 +71,28 @@ void updateRaceCar(struct RaceCar *raceCar){
 }
 void updateFirstPlace(struct Race *race, struct RaceCar *raceCare1, struct RaceCar *raceCare2){
     if((*raceCare1).totalLapTime > (*raceCare2).totalLapTime){
-        strcpy((*race).firstPlaceDriverName , (*raceCare1).driverName);
+        strcpy((*race).firstPlaceDriverName, (*raceCare1).driverName);
         strcpy((*race).firstPlaceRaceCarColor, (*raceCare1).raceCarColor);
     }else{
-        strcpy((*race).firstPlaceDriverName , (*raceCare2).driverName);
+        strcpy((*race).firstPlaceDriverName, (*raceCare2).driverName);
         strcpy((*race).firstPlaceRaceCarColor, (*raceCare2).raceCarColor);
     }
 }
+void startRace(struct RaceCar *raceCar1, struct RaceCar *raceCar2){
+    struct Race R = {5,1,"",""};
+    for(int i=0; i<R.numberOfLaps; i++){
+        updateRaceCar();
+        updateRaceCar();
+        updateFirstPlace();
 
+
+        updateFirstPlace()
+    }
+}
 
 int main()
 {
     srand(time(0));
-	struct Race R1 = {1,2,"Saad","red"};
-	struct Race R2 = {1,2,"Nouhaila","blue"};
-	struct RaceCar RC1;
 
 
 	printIntro();
