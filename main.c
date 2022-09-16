@@ -39,7 +39,7 @@ void printCountDown(){
 
 // Logic functions section
 void printFirstPlaceAfterLap(struct Race race){
-    printf("\nApres le tour numero %d \nLa premiere place est occupee par: %s dans la voiture de course %s\n",race.numberOfLaps,race.firstPlaceDriverName,race.firstPlaceRaceCarColor);
+    printf("\nApres le tour numero %d \nLa premiere place est occupee par: %s dans la voiture de course %s\n",race.currentLap,race.firstPlaceDriverName,race.firstPlaceRaceCarColor);
 
 }
 void printCongratulation(struct Race race){
@@ -48,7 +48,7 @@ void printCongratulation(struct Race race){
 }
 int calculateTimeToCompleteLap(){
     int vitesse = rand() % 3 + 1;
-    int acceleraion = rand() % 3 + 1;
+    int acceleraion = rand() % 13 + 1;
     int nerves = rand() % 3 + 1;
     switch(nerves){
     case 1:
@@ -65,40 +65,44 @@ int calculateTimeToCompleteLap(){
     return vitesse;
 }
 void updateRaceCar(struct RaceCar *raceCar){
-    for(int i=0; i<5; i++){
-        (*raceCar).totalLapTime = calculateTimeToCompleteLap() + (*raceCar).totalLapTime;
-    }
+        raceCar->totalLapTime += calculateTimeToCompleteLap();
 }
 void updateFirstPlace(struct Race *race, struct RaceCar *raceCare1, struct RaceCar *raceCare2){
     if((*raceCare1).totalLapTime > (*raceCare2).totalLapTime){
-        strcpy((*race).firstPlaceDriverName, (*raceCare1).driverName);
-        strcpy((*race).firstPlaceRaceCarColor, (*raceCare1).raceCarColor);
+        strcpy(race->firstPlaceDriverName, raceCare2->driverName);
+        strcpy(race->firstPlaceRaceCarColor, raceCare2->raceCarColor);
     }else{
-        strcpy((*race).firstPlaceDriverName, (*raceCare2).driverName);
-        strcpy((*race).firstPlaceRaceCarColor, (*raceCare2).raceCarColor);
+        strcpy(race->firstPlaceDriverName, raceCare1->driverName);
+        strcpy(race->firstPlaceRaceCarColor, raceCare1->raceCarColor);
     }
 }
 void startRace(struct RaceCar *raceCar1, struct RaceCar *raceCar2){
-    struct Race R = {5,1,"",""};
+    struct Race R;
+    R.currentLap = 1;
+    R.numberOfLaps = 5;
+    strcpy(R.firstPlaceDriverName,"");
+    strcpy(R.firstPlaceRaceCarColor,"");
     for(int i=0; i<R.numberOfLaps; i++){
-        updateRaceCar();
-        updateRaceCar();
-        updateFirstPlace();
-
-
-        updateFirstPlace()
+        updateRaceCar(raceCar1);
+        updateRaceCar(raceCar2);
+        updateFirstPlace(&R,raceCar1,raceCar2);
+        printFirstPlaceAfterLap(R);
+        R.currentLap++;
     }
+    printCongratulation(R);
 }
 
 int main()
 {
     srand(time(0));
 
+    struct RaceCar RC1 = {"Saad","Black",0};
+    struct RaceCar RC2 = {"Nouhaila","Red",0};
+
 
 	printIntro();
 	printCountDown();
-	printFirstPlaceAfterLap(R1);
-	printCongratulation(R2);
+	startRace(&RC1,&RC2);
 
     return 0;
 }
